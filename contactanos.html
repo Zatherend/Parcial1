@@ -11,11 +11,34 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-dark bg-dark mb-4 shadow">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">← Volver al Inicio</a>
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold text-danger" href="index.html">Wiki Mugiwara</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="productos.html">Productos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contactanos.html">Contacto</a>
+                </li>
+            </ul>
+            <div class="d-flex align-items-center gap-3">
+                <a href="carrito.html" class="text-white text-decoration-none position-relative">
+                    🛒 Carrito
+                </a>
+                <a href="login.html" class="btn btn-outline-light btn-sm">Iniciar Sesión</a>
+                <a href="registro.html" class="btn btn-danger btn-sm">Registrarse</a>
+            </div>
         </div>
-    </nav>
+    </div>
+</nav>
 
     <div class="container d-flex justify-content-center align-items-center" style="min-height: 75vh;">
         <div class="col-md-6 col-lg-5">
@@ -26,8 +49,10 @@
                     <p class="text-muted small">Mándanos un mensaje o inscríbete en el registro de la Marina</p>
                 </div>
 
-                <form id="contactForm">
+                <div id="errorContainer"></div>
                
+                <form id="contactForm">
+
                     <div class="mb-3">
                         <label for="nombreInput" class="form-label fw-bold">Nombre o Apodo Pirata</label>
                         <input type="text" class="form-control" id="nombreInput" placeholder="Ej. Monkey D. Luffy" required>
@@ -36,7 +61,7 @@
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label fw-bold">Correo Electrónico</label>
                         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="tu_correo@grandline.com" required>
-                        <div id="emailHelp" class="form-text">Nunca compartiremos tu correo con el Gobierno Mundial.</div>
+                        <div id="emailHelp" class="form-text">Dominios permitidos: @duoc.cl, @profesor.duoc.cl o @gmail.com.</div>
                     </div>
                  
                     <div class="mb-3">
@@ -69,17 +94,41 @@
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            const nombre = document.getElementById('nombreInput').value;
-            const email = document.getElementById('exampleInputEmail1').value;
-            const mensaje = document.getElementById('mensajeInput').value;
+            const errorContainer = document.getElementById('errorContainer');
+            errorContainer.innerHTML = '';
+            const nombre = document.getElementById('nombreInput').value.trim();
+            const email = document.getElementById('exampleInputEmail1').value.trim();
+            const mensaje = document.getElementById('mensajeInput').value.trim();
 
+            // Validar Nombre: Obligatorio, max 100 caracteres
+            if (nombre === "" || nombre.length > 100) {
+                errorContainer.innerHTML = '<div class="alert alert-danger">Error: El nombre es obligatorio y debe tener un máximo de 100 caracteres.</div>';
+                return;
+            }
 
+            // Validar Correo: Max 100 caracteres, solo permite dominios específicos
+            const dominiosPermitidos = ["@duoc.cl", "@profesor.duoc.cl", "@gmail.com"];
+            const esDominioValido = dominiosPermitidos.some(dominio => email.toLowerCase().endsWith(dominio));
+
+            if (email.length > 100 || !esDominioValido) {
+                errorContainer.innerHTML = '<div class="alert alert-danger">Error: El correo debe tener máximo 100 caracteres y pertenecer a @duoc.cl, @profesor.duoc.cl o @gmail.com.</div>';
+                return;
+            }
+
+            // Validar Mensaje: Obligatorio, max 500 caracteres
+            if (mensaje === "" || mensaje.length > 500) {
+                errorContainer.innerHTML = '<div class="alert alert-danger">Error: El mensaje es obligatorio y debe tener un máximo de 500 caracteres.</div>';
+                return;
+            }
+
+            // Si todas las validaciones pasan
             const miCorreo = "max.alvarezn@duocuc.cl"; 
-
-            const asunto = encodeURIComponent(`Nuevo mensaje de ${nombre} - Wiki Sombrero de Paja`);
+                        const asunto = encodeURIComponent(`Nuevo mensaje de ${nombre} - Wiki Sombrero de Paja`);
             const cuerpo = encodeURIComponent(`Nombre: ${nombre}\nCorreo de contacto: ${email}\n\nMensaje:\n${mensaje}`);
 
-            window.location.href = `mailto:${miCorreo}?subject=${asunto}&body=${cuerpo}`;
+            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${miCorreo}&su=${asunto}&body=${cuerpo}`;
+            
+            window.open(gmailUrl, '_blank');
         });
     </script>
 </body>
