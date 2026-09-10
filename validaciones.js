@@ -23,12 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const selectRegion = document.getElementById('region');
   const selectComuna = document.getElementById('comuna');
 
-  // Llenar el select de regiones al cargar la página
   if (selectRegion && selectComuna) {
-    // Limpiar opciones previas por seguridad
+
     selectRegion.innerHTML = '<option value="">Seleccione una región</option>';
     
-    // Poblar las regiones desde el objeto
+
     Object.keys(regionesYComunas).forEach(region => {
       const option = document.createElement('option');
       option.value = region;
@@ -36,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
       selectRegion.appendChild(option);
     });
 
-    // Evento al cambiar de región
+
     selectRegion.addEventListener('change', (e) => {
       const regionSeleccionada = e.target.value;
       selectComuna.innerHTML = '<option value="">Seleccione una comuna</option>';
