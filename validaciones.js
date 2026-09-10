@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   
-  // Resto de tus funciones de validación...
+
 
   const validarEmail = (email) => {
     const dominiosValidos = ['@duoc.cl', '@profesor.duoc.cl', '@gmail.com'];
@@ -72,7 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
     form.querySelectorAll('small').forEach(s => s.textContent = '');
   };
 
-  // Validación Registro
   if (formRegistro) {
     formRegistro.addEventListener('submit', (e) => {
       limpiarErrores(formRegistro);
@@ -101,43 +100,43 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
- // Validación Login con redirección a Admin o Tienda
+
   if (formLogin) {
     formLogin.addEventListener('submit', (e) => {
-      e.preventDefault(); // Evitamos el envío por defecto para validar
+      e.preventDefault(); 
       limpiarErrores(formLogin);
       let isValid = true;
 
-      // Apuntamos directamente a los ID correctos de login.html
+
       const correoInput = document.getElementById('email');
       const passwordInput = document.getElementById('password');
       
       const correo = correoInput.value.trim();
       const password = passwordInput.value;
 
-      // Validar formato de correo
+
       if (!validarEmail(correo)) {
         mostrarError(correoInput, 'Correo inválido (debe ser @duoc.cl, @profesor.duoc.cl o @gmail.com)');
         isValid = false;
       }
 
-      // Validar longitud de contraseña
+
       if (password.length < 4 || password.length > 10) {
         mostrarError(passwordInput, 'La contraseña debe tener entre 4 y 10 caracteres');
         isValid = false;
       }
 
       if (isValid) {
-        // Credenciales para Administrador
+
         if (correo === "admin@duoc.cl" && password === "admin123") {
           alert("¡Bienvenido, Administrador!");
           localStorage.setItem("usuarioLogueado", JSON.stringify({ correo, rol: "Administrador" }));
-          window.location.href = "admin-producto.html"; // Redirige al panel de administración
+          window.location.href = "admin-producto.html"; 
         } else {
-          // Usuario normal / Cliente
+
           alert("¡Inicio de sesión exitoso!");
           localStorage.setItem("usuarioLogueado", JSON.stringify({ correo, rol: "Cliente" }));
-          window.location.href = "productos.html"; // Redirige a la tienda
+          window.location.href = "productos.html"; 
         }
       }
     });
