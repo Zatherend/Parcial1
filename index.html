@@ -61,16 +61,47 @@
                 </div>
 
                 <h3>Sus Barcos</h3>
-                <ul class="list-group list-group-flush mb-4">
-                    <li class="list-group-item">
-                        <div class="text-center mb-2"><img src="img/goingmerry.webp" alt="Going Merry" class="img-fluid w-100 rounded"></div>
+             <div id="barcosCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
+    <div class="carousel-inner">
+
+        <div class="carousel-item active">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="text-center mb-2">
+                        <img src="img/goingmerry.webp" alt="Going Merry" class="img-fluid w-100 rounded">
+                    </div>
+                    <p class="card-text">
                         <strong>Going Merry:</strong> Fue el primer barco oficial de la tripulación, una carabela entregada por Kaya como agradecimiento. Llevó a la tripulación desde el East Blue hasta Water 7. El Merry fue considerado un nakama (compañero) más.
-                    </li>
-                    <li class="list-group-item">
-                        <div class="text-center mb-2"><img src="img/thousandsunny.webp" alt="Thousand Sunny" class="img-fluid w-100 rounded"></div>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="carousel-item">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="text-center mb-2">
+                        <img src="img/thousandsunny.webp" alt="Thousand Sunny" class="img-fluid w-100 rounded">
+                    </div>
+                    <p class="card-text">
                         <strong>Thousand Sunny:</strong> El segundo y actual barco de la tripulación. Es una corbeta diseñada y construida por Franky con la madera del Árbol Adam. Cuenta con tecnología avanzada, como el sistema "Soldier Dock" y el cañón "Gaon".
-                    </li>
-                </ul>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#barcosCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#barcosCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+        <span class="visually-hidden">Siguiente</span>
+    </button>
+</div>
  
                 <div class="card mt-4 mb-4" style="background-color: rgba(0, 0, 0, 0.5); border: 1px solid #ff6b6b;">
                     <div class="card-body text-white">
